@@ -6,23 +6,56 @@ const ADDRESS_BNB = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
 const ADDRESS_RISKMOON = "0xa96f3414334F5A0A529ff5d9D8ea95f42147b8C9";
 const ADDRESS_USDT = "0xe9e7cea3dedca5984780bafc599bd69add087d56";
 const BigNumber = require("bignumber.js");
-Web3 = require("web3");
+const Web3 = require("web3");
+const web3 = new Web3("https://bsc-dataseed1.binance.org:443");
+const riskmoonAbi = require("./abis/RiskMoon.json");
+const riskmoonContract = new web3.eth.Contract(
+  riskmoonAbi,
+  ADDRESS_RISKMOON
+);
+
+class RiskmoonStats {
+
+  decimals = 9; // gets overriden at run-time
+
+  constructor() {
+    this.init();
+  }
+
+  init = async function () {
+    this.numDecimals = await this.getDecimals();
+  }
+
+  getBurnedTokens = async function() {
+    return (await riskmoonContract.methods
+      .balanceOf('0x000000000000000000000000000000000000dead')
+      .call())
+      /Math.pow(10,this.numDecimals);
+  }
+  getTotalSupply = async function () {
+    return (await riskmoonContract.methods
+      .totalSupply()
+      .call())
+      /Math.pow(10,this.numDecimals);
+  }
+  getDecimals = async function () {
+    return await riskmoonContract.methods
+      .decimals()
+      .call();    
+  }
+  getDollarFormatted = function (rawDollar) {
+    return '$' + rawDollar.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+}
 
 class RiskmoonPrice {
-  web3 = new Web3("https://bsc-dataseed1.binance.org:443");
   pancakeswapFactoryAbi = require("./abis/PancakeFactoryV2.json");
   pancakeswapPairAbi = require("./abis/PancakePair.json");
-  riskmoonAbi = require("./abis/RiskMoon.json");
-
-  riskmoonContract = new this.web3.eth.Contract(
-    this.riskmoonAbi,
-    ADDRESS_RISKMOON
-  );
-  pancakeswapFactoryV1 = new this.web3.eth.Contract(
+  pancakeswapFactoryV1 = new web3.eth.Contract(
     this.pancakeswapFactoryAbi,
     PANCAKESWAP_FACTORY_ADDR_V1
   );
-  pancakeswapFactoryV2 = new this.web3.eth.Contract(
+  pancakeswapFactoryV2 = new web3.eth.Contract(
     this.pancakeswapFactoryAbi,
     PANCAKESWAP_FACTORY_ADDR_V2
   );
@@ -32,7 +65,7 @@ class RiskmoonPrice {
   }
 
   init = async function () {
-    this.riskmoonDecimals = await this.riskmoonContract.methods
+    this.riskmoonDecimals = await riskmoonContract.methods
       .decimals()
       .call();
       this.contractPairs = [
@@ -47,7 +80,7 @@ class RiskmoonPrice {
     const pairAddress = await factory.methods
       .getPair(address0, address1)
       .call();
-    return new this.web3.eth.Contract(this.pancakeswapPairAbi, pairAddress);
+    return new web3.eth.Contract(this.pancakeswapPairAbi, pairAddress);
   };
 
   // Price is reserve1/reserve0. However, sometimes we want to take the average of all of the pairs in the
@@ -89,7 +122,7 @@ class RiskmoonPrice {
         }
       };
 
-      let batch = new this.web3.eth.BatchRequest();
+      let batch = new web3.eth.BatchRequest();
       calls.forEach((call) => {
         batch.add(call.call.request((e, r) => callback(call, e, r)));
       });
@@ -124,3 +157,4 @@ class RiskmoonPrice {
 }
 
 module.exports.RiskmoonPrice = RiskmoonPrice;
+module.exports.RiskmoonStats = RiskmoonStats;
