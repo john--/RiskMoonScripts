@@ -9,7 +9,7 @@ const rmPrice = new RISKMOONLIB.RiskmoonPrice();
 const stats = new RISKMOONLIB.RiskmoonStats();
 
 bot.on('message', async (msg) => {
-  if (msg.text.startsWith('/price')) {
+  if (!!msg && !!msg.text && msg.text.startsWith('/price')) {
     const chatId = msg.chat.id;
 
     const price = await rmPrice.getLatestPrice();
@@ -33,6 +33,6 @@ bot.on('message', async (msg) => {
 [Chart](https://rsk.mn/chart) | [Buy](https://rsk.mn/buy) | [BSCScan](https://rsk.mn/bscscan) | [Website](https://riskmoon.com)
 `;
 
-    bot.sendMessage(chatId, reply);
+    bot.sendMessage(chatId, reply, { parse_mode: 'Markdown' });
   }
 });
