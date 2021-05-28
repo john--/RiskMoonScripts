@@ -8,7 +8,7 @@ const bot = new TelegramBot(BOTTOKEN, { polling: true });
 const rmPrice = new RISKMOONLIB.RiskmoonPrice();  
 const stats = new RISKMOONLIB.RiskmoonStats();
 
-bot.on('channel_post', async (msg) => {
+bot.on('message', async (msg) => {
   if (msg.text.startsWith('/price')) {
     const chatId = msg.chat.id;
 
