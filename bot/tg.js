@@ -24,13 +24,13 @@ bot.on('message', async (msg) => {
     const marketCap =  stats.getDollarFormatted(price * totalCirculation);
 
     let reply =
-`RISKMOON
+`*RISKMOON*
 1M tokens = \$${pricePer1M.toFixed(6)}
-💴 **Market Cap**: ${marketCap}
-💰 **Circulating Supply**: ${totalCirculationInT}T / ${totalSupplyInT}T
-🔥 **Total burned**: ${burnedTokensInT}T / ${priceBurnedTokens}
+💴 *Market Cap*: ${marketCap}
+💰 *Circulating Supply*: ${totalCirculationInT}T / ${totalSupplyInT}T
+🔥 *Total burned*: ${burnedTokensInT}T / ${priceBurnedTokens}
 
-[Chart](https://rsk.mn/chart) | [Buy](https://rsk.mn/buy) | [BSCScan](https://rsk.mn/bscscan) | [Website](https://riskmoon.com)
+[Chart](https://rsk.mn/chart) | [Buy](https://rsk.mn/buy) | [BSCScan](https://rsk.mn/bscscan) | [Website](https://riskmoon.com) | [Wallet](https://rsk.mn/wallet)
 `;
 
     bot.sendMessage(chatId, reply, { parse_mode: 'Markdown' });
