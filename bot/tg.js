@@ -30,7 +30,7 @@ bot.on('message', async (msg) => {
 💰 *Circulating Supply*: ${totalCirculationInT}T / ${totalSupplyInT}T
 🔥 *Total burned*: ${burnedTokensInT}T / ${priceBurnedTokens}
 
-[Chart](https://rsk.mn/chart) | [Buy](https://rsk.mn/buy) | [Wallet](https://rsk.mn/wallet) | [BSCScan](https://rsk.mn/bscscan) | [Website](https://riskmoon.com)
+[Chart](https://rsk.mn/chart) | [Buy](https://rsk.mn/buy) | [Wallet](https://rsk.mn/wallet) | [BSCScan](https://rsk.mn/bscscan) | [UniRocket](https://rsk.mn/unirocket) | [Website](https://riskmoon.com)
 `;
 
     bot.sendMessage(chatId, reply, { parse_mode: 'Markdown' });
