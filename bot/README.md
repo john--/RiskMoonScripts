@@ -8,6 +8,7 @@ Setup in a nut shell
 git clone https://github.com/john--/RiskMoonScripts.git
 cd RiskMoonScripts/bot
 npm install
+mkdir secrets
 echo BOTTOKEN="YOURSECRETTGTOKENHERE" > ./secrets/.env
 node tg.js
 ```
