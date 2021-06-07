@@ -1,7 +1,7 @@
 Pre-requisites:
 - git
 - nodejs
-- A telegram bot configured, and a token generated
+- A telegram bot configured, and a token generated (see https://core.telegram.org/bots)
 
 Setup in a nut shell
 ```
