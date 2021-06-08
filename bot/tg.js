@@ -31,7 +31,7 @@ bot.on('message', async (msg) => {
 🔥 *Total burned*: ${burnedTokensInT}T / ${priceBurnedTokens}
 
 [Buy](https://rsk.mn/buy) | [Wallet](https://rsk.mn/wallet) | [UniRocket](https://rsk.mn/unirocket) | [BSCScan](https://rsk.mn/bscscan) | [Website](https://riskmoon.com)
-📈 *[Charts:](https://rsk.mn/chart)* [DexGuru](https://rsk.mn/dex) | [Bogged](https://rsk.mn/bog) | [DexT](https://rsk.mn/dext)
+📈 [Charts](https://rsk.mn/chart): [DexGuru](https://rsk.mn/dex) | [Bogged](https://rsk.mn/bog) | [DexT](https://rsk.mn/dext)
 📣 *Social Insights:* [LunarCrush](https://rsk.mn/insights)
 `;
 
