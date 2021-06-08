@@ -20,7 +20,7 @@ const RISKMOONLIB = require('./riskmoonlib.js');
 
     console.log(`1M tokens = \$${pricePer1M.toFixed(6)}`);
     console.log(`Market Cap: ${marketCap}`);
-    console.log(`Circulating Supply: ${totalCirculationInT}T / ${totalSupplyInT}T`);
+    console.log(`Total Supply: ${totalCirculationInT}T / ${totalSupplyInT}T`);
     console.log(`Total burned: ${burnedTokensInT}T / ${priceBurnedTokens}`);
     console.log('======');
   }, 1000);
